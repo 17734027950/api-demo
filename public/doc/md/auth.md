@@ -1,4 +1,4 @@
-Dawn-Api 
+api接口 
 ===============
 
 [Toc]
@@ -19,13 +19,13 @@ thinkphp5编写的restful风格的API，集API请求处理，权限认证，自�
 ## 安装
 - 如果想在你的TP5项目中使用,那么可以直接使用
 ```
-composer require liushoukun/dawn-api
+composer require liushoukun/api接口
 ```
 - 如果是新项目先要创建tp5项目,然后再require
 
 ```
 composer create-project topthink/think api  --prefer-dist
-composer require liushoukun/dawn-api
+composer require liushoukun/api接口
 ```
 - 如果要使用生成文档 需要在public/static/ 下 安装hadmin
 ```
@@ -33,7 +33,7 @@ cd /public/static/
 git clone  hhttps://git.oschina.net/liushoukun/hadmin.git
 ```
 ## demo 
- [dawn-api-demo](http://git.oschina.net/liushoukun/restfulapi-tp5)
+ [api接口-demo](http://git.oschina.net/liushoukun/restfulapi-tp5)
 
 ## 使用
 
@@ -71,7 +71,7 @@ public $restMethodList ='get|post|delete';
      public function get(Request $request)
      {
          // todo find
-         return $this->sendSuccess(['name' => 'dawn-api', 'id' => 1]);
+         return $this->sendSuccess(['name' => 'api接口', 'id' => 1]);
      }
  
      /**
@@ -142,7 +142,7 @@ self::$app['auth']->getUser();
      */
     public function getUser()
     {
-       return ['app_id'=>'111','name'=>'dawn-api'];
+       return ['app_id'=>'111','name'=>'api接口'];
     }
 
 ```
@@ -180,7 +180,7 @@ public    $apiAuth = true;
     {
         $user = self::$app['auth']->getUser();
         // todo find
-        return $this->sendSuccess(['name' => 'dawn-api', 'id' => 1, 'user' => $user]);
+        return $this->sendSuccess(['name' => 'api接口', 'id' => 1, 'user' => $user]);
     }
 ```
 
@@ -430,21 +430,3 @@ class User extends Base{}
 ![all](/doc/images/demo16.png)
 ![all](/doc/images/demo17.png)
 ![all](/doc/images/demo18.png)
- 
-
-  
-
-
-## 开发文档参考
-
- - [ThinkPHP5完全开发手册](http://www.kancloud.cn/manual/thinkphp5)
- - [restfulApi设计指南](http://www.ruanyifeng.com/blog/2014/05/restful_api.html)
- - [OAuth 2.0](http://www.ruanyifeng.com/blog/2014/05/oauth_2_0.html)
- 
- 
-
-## 开发工具推荐
- - IDE PHPSTORM
- - 模拟请求 Postman
-
-
