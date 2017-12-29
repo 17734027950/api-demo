@@ -1,3 +1,4 @@
 /vendor/
 /thinkphp/
 /runtime/
+/composer.lock
