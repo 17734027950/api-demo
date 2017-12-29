@@ -10,9 +10,9 @@
 		</title>
 		<meta name="keywords" content="<?php echo sysconfig('CMS_KEYWORDS'); ?>" />
 		<meta name="description" content="<?php echo sysconfig('CMS_DESCRIPTION'); ?>" />
-		<link rel="stylesheet" href="__STATIC__/default/images/style.css" media="all">
-		<script type="text/javascript" src="__STATIC__/default/js/jquery.min.js"></script>
-		<script type="text/javascript" src="__STATIC__/default/js/ad.js"></script>
+		<link rel="stylesheet" href="<?php echo sysconfig('CMS_BASEHOST'); ?>/images/style.css" media="all">
+		<script type="text/javascript" src="<?php echo sysconfig('CMS_BASEHOST'); ?>/js/jquery.min.js"></script>
+		<script type="text/javascript" src="<?php echo sysconfig('CMS_BASEHOST'); ?>/js/ad.js"></script>
 	</head>
 
 	<body>
@@ -31,9 +31,9 @@
 				<?php $posts=arclist(array("row"=>11,"where"=>array("tuijian"=>array('NEQ',1))));foreach($posts as $row){ ?>
 				<div class="list">
 					<?php if(!empty($row['litpic'])){ ?>
-					<a class="limg" href="<?php echo sysconfig('CMS_BASEHOST',$url); ?><?php echo get_front_url(array("id"=>$row['id'],"catid "=>$row['typeid'],"type"=>'content')); ?>"><img alt="<?php echo $row['title']; ?>" src="<?php echo $row['litpic']; ?>"></a>
+					<a class="limg" href="<?php echo get_front_url(array("id"=>$row['id'],"catid "=>$row['typeid'],"type"=>'content')); ?>"><img alt="<?php echo $row['title']; ?>" src="<?php echo $row['litpic']; ?>"></a>
 					<?php } ?>
-					<strong class="tit"><a href="<?php echo sysconfig('CMS_BASEHOST',$url); ?><?php echo get_front_url(array("id"=>$row['id'],"catid"=>$row['typeid'],"type"=>'content')); ?>" target="_blank"><?php echo $row['title']; ?></a></strong>
+					<strong class="tit"><a href="<?php echo get_front_url(array("id"=>$row['id'],"catid"=>$row['typeid'],"type"=>'content')); ?>" target="_blank"><?php echo $row['title']; ?></a></strong>
 					<p>
 						<?php echo mb_strcut($row['description'],0,150,'UTF-8'); ?>..</p>
 					<div class="info"><span class="fl"><?php if(!empty($row['writer'])){ echo '<i>'.$row['writer'].'</i>'; }elseif(!empty($row['source'])){ echo '<i>'.$row['source'].'</i>'; } ?><em><?php echo date("m-d H:i",$row['pubdate']); ?></em></span><span class="fr"><em><?php echo $row['click']; ?></em>人阅读</span></div>
@@ -59,7 +59,7 @@
 					<ul class="uli chs" id="xglist">
 						<?php $posts=arclist(array("row"=>5,"tuijian"=>1));foreach($posts as $row){ ?>
 						<li>
-							<a target="_blank" href="<?php echo sysconfig('CMS_BASEHOST',$url); ?><?php echo get_front_url(array("id"=>$row['id'],"catid "=>$row['typeid'],"type"=>'content')); ?>">
+							<a target="_blank" href="<?php echo get_front_url(array("id"=>$row['id'],"catid "=>$row['typeid'],"type"=>'content')); ?>">
 								<?php echo $row['title']; ?>
 							</a>
 						</li>
@@ -78,9 +78,9 @@
 						<?php $posts=arclist(array("row"=>5,"orderby"=>'rand()'));foreach($posts as $row){ ?>
 						<div class="suli">
 							<?php if(!empty($row['litpic'])){ ?>
-							<a class="limg" href="<?php echo sysconfig('CMS_BASEHOST',$url); ?><?php echo get_front_url(array("id"=>$row['id'],"catid"=>$row['typeid'],"type"=>'content')); ?>"><img alt="<?php echo $row['title']; ?>" src="<?php echo $row['litpic']; ?>"></a>
+							<a class="limg" href="<?php echo get_front_url(array("id"=>$row['id'],"catid "=>$row['typeid'],"type"=>'content')); ?>"><img alt="<?php echo $row['title']; ?>" src="<?php echo $row['litpic']; ?>"></a>
 							<?php } ?>
-							<a target="_blank" href="<?php echo sysconfig('CMS_BASEHOST',$url); ?><?php echo get_front_url(array("id"=>$row['id'],"catid "=>$row['typeid'],"type"=>'content')); ?>">
+							<a target="_blank" href="<?php echo get_front_url(array("id"=>$row['id'],"catid "=>$row['typeid'],"type"=>'content')); ?>">
 								<?php echo $row['title']; ?>
 							</a>
 							<div class="sulii">
@@ -100,7 +100,7 @@
 					</div>
 					<div class="ws-tag">
 						<?php $posts=tagslist(array("row"=>5,"orderby"=>'rand()'));foreach($posts as $row){ ?>
-						<a href="<?php echo sysconfig('CMS_BASEHOST',$url); ?><?php echo get_front_url(array("id"=>$row['id'],"tagid"=>$row['id'],"type"=>'tags')); ?>">
+						<a href="<?php echo get_front_url(array("id"=>$row['id'],"tagid"=>$row['id'],"type"=>'tags')); ?>">
 							<?php echo $row['tag']; ?>
 						</a>
 						<?php } ?>
@@ -114,7 +114,7 @@
 					</div>
 					<div class="rtags mt10">
 						<?php $posts=flinklist(array("row"=>5,"orderby"=>'rand()'));foreach($posts as $row){ ?>
-						<a href="<?php echo sysconfig('CMS_BASEHOST',$url); ?><?php echo $row['url']; ?>">
+						<a href="<?php echo $row['url']; ?>">
 							<?php echo $row['webname']; ?>
 						</a>
 						<?php } ?>
@@ -132,7 +132,7 @@
 		<!-- box end -->
 		<script>
 			function getmore(condition) {
-				var url = "<?php echo sysconfig('CMS_BASEHOST',$url); ?>api/listarc";
+				var url = "<?php echo sysconfig('CMS_BASEHOST'); ?>/api/listarc";
 				//var typeid = "";
 				$.post(url, condition, function(res) {
 					if(res.code == 0) {
@@ -142,13 +142,13 @@
 							//循环获取数据
 							//var title = json[index].title;
 							if(condition.mode == 1) {
-								str = str + '<li><a target="_blank" href="<?php echo sysconfig('CMS_BASEHOST',$url); ?>' + json[index].url + '">' + json[index].title + '</a></li>';
+								str = str + '<li><a target="_blank" href="' + json[index].url + '">' + json[index].title + '</a></li>';
 							} else if(condition.mode == 2) {
 								var litpic = '';
 								if(json[index].litpic !== '') {
-									litpic = '<a class="limg" href="<?php echo sysconfig('CMS_BASEHOST',$url); ?>' + json[index].url + '"><img alt="' + json[index].title + '" src="' + json[index].litpic + '"></a>';
+									litpic = '<a class="limg" href="' + json[index].url + '"><img alt="' + json[index].title + '" src="' + json[index].litpic + '"></a>';
 								}
-								str = str + '<div class="suli">' + litpic + '<a target="_blank" href="<?php echo sysconfig('CMS_BASEHOST',$url); ?>' + json[index].url + '">' + json[index].title + '</a><div class="sulii">阅读(' + json[index].click + ')</div><div class="cl"></div></div>';
+								str = str + '<div class="suli">' + litpic + '<a target="_blank" href="' + json[index].url + '">' + json[index].title + '</a><div class="sulii">阅读(' + json[index].click + ')</div><div class="cl"></div></div>';
 							}
 						});
 

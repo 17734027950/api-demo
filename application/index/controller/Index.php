@@ -10,21 +10,12 @@ class Index extends Controller
     //首页
     public function index()
 	{
-		$request = Request::instance();
-		$url = $request->url(true);
-		$this->assign('url',$url);
-		
         return $this->fetch();
     }
 	
     //列表页
     public function category()
 	{
-		// $request = Request::instance();
-		// $url = $request->url(true);
-
-		// $this->assign('url',$url.'/../');
-
         $cat=input('cat');
         $pagenow=input('page');
         

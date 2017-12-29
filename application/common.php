@@ -10,29 +10,29 @@ function dataList($modelname, $map = '', $orderby = '', $field = '*', $listRows 
 }
 
 //pc前台栏目、标签、内容页面地址生成
-function get_front_url($param='')
+function get_front_url($param='',$html = '.html')
 {
 	$url = '';
 	
     if($param['type'] == 'list')
     {
         //列表页
-        $url .= '/cat'.$param['catid'];
+        $url .= '/cat'.$param['catid'].$html;
     }
     else if($param['type'] == 'content')
     {
         //内容页
-        $url .= '/p/'.$param['id'];
+        $url .= '/p/'.$param['id'].$html;
     }
     else if($param['type'] == 'tags')
     {
         //tags页面
-        $url .= '/tag'.$param['tagid'];
+        $url .= '/tag'.$param['tagid'].$html;
     }
     else if($param['type'] == 'page')
     {
         //单页面
-        $url .= '/page/'.$param['pagename'].'.html';
+        $url .= '/page/'.$param['pagename'].$html;
     }
     
     return $url;
@@ -182,7 +182,7 @@ function get_article_prenext(array $param)
  * @param $param['offset'] 偏移量
  * @return array
  */
-function get_listnav(array $param)
+function get_listnav(array $param,$html = '.html')
 {
 	$catid=$param["catid"];
 	$pagenow=$param["pagenow"];
@@ -217,14 +217,14 @@ function get_listnav(array $param)
 	{
 		if($pagenow == 2)
 		{
-			$prepage.="<li><a href='".$catid."'>上一页</a></li>";
+			$prepage.="<li><a href='/".$urltype.$catid.$html."'>上一页</a></li>";
 		}
 		else
 		{
-			$prepage.="<li><a href='".$catid."/$prepagenum'>上一页</a></li>";
+			$prepage.="<li><a href='/".$urltype.$catid."/$prepagenum$html'>上一页</a></li>";
 		}
 		
-		$indexpage="<li><a href='".$catid."'>首页</a></li>";
+		$indexpage="<li><a href='/".$urltype.$catid.$html."'>首页</a></li>";
 	}
 	else
 	{
@@ -232,8 +232,8 @@ function get_listnav(array $param)
 	}
 	if($pagenow!=$totalpage && $totalpage>1)
 	{
-		$nextpage.="<li><a href='".$urltype.$catid."/$nextpagenum'>下一页</a></li>";
-		$endpage="<li><a href='".$urltype.$catid."/$totalpage'>末页</a></li>";
+		$nextpage.="<li><a href='/".$urltype.$catid."/$nextpagenum$html'>下一页</a></li>";
+		$endpage="<li><a href='/".$urltype.$catid."/$totalpage$html'>末页</a></li>";
 	}
 	else
 	{
@@ -260,11 +260,11 @@ function get_listnav(array $param)
 		{
 			if($minnum==1)
 			{
-				$listdd.="<li><a href='".$urltype.$catid."'>$minnum</a></li>";
+				$listdd.="<li><a href='/".$urltype.$catid.$html."'>$minnum</a></li>";
 			}
 			else
 			{
-				$listdd.="<li><a href='".$urltype.$catid."/$minnum'>$minnum</a></li>";
+				$listdd.="<li><a href='/".$urltype.$catid."/$minnum$html'>$minnum</a></li>";
 			}
 		}
 	}
@@ -797,40 +797,36 @@ function dir_delete($dir)
 }
 
 //读取动态配置
-function sysconfig($varname='',$url = '')
+function sysconfig($varname='')
 {
-	if($varname=='CMS_BASEHOST'){
-		return $url;
-	}else{
-		$sysconfig = cache('sysconfig');
-		$res = '';
+	$sysconfig = cache('sysconfig');
+	$res = '';
+	
+	if(empty($sysconfig))
+	{
+		cache('sysconfig', NULL);
+        
+		$sysconfig = db('sysconfig')->field('varname,value')->select();
 		
-		if(empty($sysconfig))
+		cache('sysconfig',$sysconfig,86400);
+	}
+	
+	if($varname != '')
+	{
+		foreach($sysconfig as $row)
 		{
-			cache('sysconfig', NULL);
-	        
-			$sysconfig = db('sysconfig')->field('varname,value')->select();
-			
-			cache('sysconfig',$sysconfig,86400);
-		}
-		
-		if($varname != '')
-		{
-			foreach($sysconfig as $row)
+			if($varname == $row['varname'])
 			{
-				if($varname == $row['varname'])
-				{
-					$res = $row['value'];
-				}
+				$res = $row['value'];
 			}
 		}
-		else
-		{
-			$res = $sysconfig;
-		}
-		
-		return $res;
 	}
+	else
+	{
+		$res = $sysconfig;
+	}
+	
+	return $res;
 }
 
 if (! function_exists('dd')) {

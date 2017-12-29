@@ -12,9 +12,9 @@
 use think\Route;
 
 //首页
-Route::any('/wiki',function (){
-    return redirect('wiki');
-});
+// Route::any('/wiki',function (){
+//     return redirect('wiki');
+// });
 
 
 
@@ -28,7 +28,7 @@ Route::any('accessToken','demo/auth/accessToken');//Oauth
 
 
 // 文档
-\Yangapi\route\DawnRoute::wiki();
+\Yangapi\route\YangRoute::wiki();
 
 
 // 路由配置文件
