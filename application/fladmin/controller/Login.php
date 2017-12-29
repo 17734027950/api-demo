@@ -38,11 +38,11 @@ class Login extends Controller
 			
 			db("user")->where("id=".$User['id'])->setField('logintime',time());
 			
-			$this->success('登录成功！', CMS_ADMIN , 1);
+			$this->success('登录成功！', url('fladmin/index/index') , 1);
         }
         else
         {
-            $this->error('登录失败！请重新登录！！', CMS_ADMIN.'Login' ,1);
+            $this->error('登录失败！请重新登录！！', CMS_ADMIN.'login' ,1);
         }
     }
 
@@ -61,11 +61,11 @@ class Login extends Controller
         
         if(db('user')->where("id=1")->update($data))
         {
-            $this->success('密码恢复成功！', CMS_ADMIN.'Login' , 1);
+            $this->success('密码恢复成功！', CMS_ADMIN.'login' , 1);
         }
 		else
 		{
-			$this->error('密码恢复失败！', CMS_ADMIN.'Login' , 3);
+			$this->error('密码恢复失败！', CMS_ADMIN.'login' , 3);
 		}
     }
 	

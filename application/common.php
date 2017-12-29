@@ -2,7 +2,7 @@
 // 公共函数文件
 
 //定义常量
-define('CMS_ADMIN', '/fladmin/');  // 后台模块，首字母最好大写
+define('CMS_ADMIN', 'fladmin/');  // 后台模块，首字母最好大写
 
 function dataList($modelname, $map = '', $orderby = '', $field = '*', $listRows = 15)
 {
