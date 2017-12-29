@@ -135,9 +135,11 @@ class Index extends Controller
     //搜索页
 	public function search()
 	{
-		if(!empty($_GET["keyword"]))
+		$q = input('get.q');
+
+		if(!empty($q))
 		{
-			$keyword = $_GET["keyword"]; //搜索的关键词
+			$keyword =$q; //搜索的关键词
 			if(strstr($keyword,"&")) exit;
 			
 			$map['title'] = array('LIKE',"%$keyword%");
@@ -147,7 +149,8 @@ class Index extends Controller
 		}
 		else
 		{
-			$this->error('请输入正确的关键词', '/' , 3);exit;
+			$this->error('请输入正确的关键词', '' , 3);
+			exit;
 		}
 		
 		return $this->fetch();
