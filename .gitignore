@@ -1,5 +1,6 @@
-/vendor/
-/thinkphp/
-/runtime/
-/composer.lock
-/application/common.ini.php
+vendor/
+thinkphp/
+runtime/
+composer.lock
+application/common.inc.php
+public/static/huiadmin/*
