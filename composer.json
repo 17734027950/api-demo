@@ -20,7 +20,7 @@
         "topthink/framework": "^5.0",
         "ircmaxell/random-lib": "^1.2",
         "symfony/var-dumper": "^2.8",
-        "17734027950/api": "^1.0.5"
+        "17734027950/api": "^1.0.6"
     },
     "extra": {
         "think-path": "thinkphp"
